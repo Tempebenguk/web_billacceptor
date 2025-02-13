@@ -6,6 +6,7 @@ $total_amount = 0;
 $log_entries = [];
 
 if (file_exists($log_file)) {
+    // Membaca file log
     $lines = file($log_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         if (strpos($line, 'Akumulasi transaksi:') !== false) {

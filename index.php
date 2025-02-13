@@ -16,7 +16,7 @@
                 })
                 .catch(error => console.error('Error fetching data:', error));
         }
-        setInterval(fetchData, 2000);
+        setInterval(fetchData, 1000);
         window.onload = fetchData;
     </script>
 </head>
