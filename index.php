@@ -1,5 +1,23 @@
 <?php
 session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $received_amount = $_POST['received_amount'] ?? 0;
+    $total_amount = $_POST['total_amount'] ?? 0;
+
+    $_SESSION['received_amount'] = $received_amount;
+    $_SESSION['total_amount'] = $total_amount;
+
+    echo json_encode([
+        'status' => 'success',
+        'received_amount' => $received_amount,
+        'total_amount' => $total_amount
+    ]);
+    exit;
+}
+
+$received_amount = $_SESSION['received_amount'] ?? 0;
+$total_amount = $_SESSION['total_amount'] ?? 0;
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +25,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Transaksi</title>
+    <title>Real-Time Transaction Data</title>
 </head>
 <body>
     <h1>Data Transaksi Bill Acceptor</h1>
@@ -17,24 +35,24 @@ session_start();
 
     <script>
     function updateTransactionData() {
-        fetch('transaction.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                document.getElementById('transaction_data').innerHTML = 
-                    `Uang Masuk: Rp. ${data.received_amount} <br>
-                     Total Akumulasi: Rp. ${data.total_amount} <br>`;
-            } else {
-                document.getElementById('transaction_data').innerHTML = 'Error retrieving data';
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'index.php', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                if (data.status === 'success') {
+                    document.getElementById('transaction_data').innerHTML = 
+                        `Uang Masuk: Rp. ${data.received_amount} <br>
+                         Total Akumulasi: Rp. ${data.total_amount} <br>`;
+                } else {
+                    document.getElementById('transaction_data').innerHTML = 'Error retrieving data';
+                }
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('transaction_data').innerHTML = 'Failed to fetch data';
-        });
+        };
+        xhr.send();
     }
-    setInterval(updateTransactionData, 1000);
-</script>
 
+    setInterval(updateTransactionData, 50);
+    </script>
 </body>
 </html>
