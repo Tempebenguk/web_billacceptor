@@ -47,17 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div id="transaction_data"></div>
 
     <script>
-        // Fungsi untuk mengambil data transaksi dari file
         function updateTransactionData() {
-            fetch('log.txt')  // Pastikan ini mengarah ke file log yang benar
+            const timestamp = new Date().getTime();
+            fetch('/home/eksan/logs/log.txt?timestamp=' + timestamp)
             .then(response => response.text())
             .then(data => {
                 document.getElementById('transaction_data').innerText = data;
             });
         }
 
-        // Memanggil updateTransactionData setiap 5 detik untuk memuat data terbaru
-        setInterval(updateTransactionData, 5000);
+        setInterval(updateTransactionData, 1000);
     </script>
 </body>
 </html>
