@@ -6,7 +6,7 @@ $total_amount = 0;
 $last_received = $_SESSION['received_amount'] ?? 0;
 $log_entries = [];
 
-if (file_exists($log_file)) {
+if (file_exists($log_file) && is_readable($log_file)) {
     $lines = file($log_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         if (strpos($line, '💰 Uang masuk:') !== false) {
@@ -22,8 +22,10 @@ if (file_exists($log_file)) {
                 $total_amount = (int) $matches[1];
             }
         }
-        $log_entries[] = $line;
+        $log_entries[] = htmlspecialchars($line);
     }
+} else {
+    $log_entries[] = '⚠️ Tidak dapat membaca file log! Periksa izin akses.';
 }
 
 echo json_encode([
