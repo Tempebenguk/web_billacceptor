@@ -1,25 +1,3 @@
-<?php
-session_start();
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $received_amount = $_POST['received_amount'] ?? 0;
-    $total_amount = $_POST['total_amount'] ?? 0;
-
-    $_SESSION['received_amount'] = $received_amount;
-    $_SESSION['total_amount'] = $total_amount;
-
-    echo json_encode([
-        'status' => 'success',
-        'received_amount' => $received_amount,
-        'total_amount' => $total_amount
-    ]);
-    exit;
-}
-
-$received_amount = $_SESSION['received_amount'] ?? 0;
-$total_amount = $_SESSION['total_amount'] ?? 0;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +10,8 @@ $total_amount = $_SESSION['total_amount'] ?? 0;
 
     <h2>Transaksi Terkini (Real-Time):</h2>
     <div id="transaction_data"></div>
+    <h3>Log Transaksi Terakhir:</h3>
+    <ul id="logs"></ul>
 
     <script>
     function updateTransactionData() {
@@ -44,6 +24,9 @@ $total_amount = $_SESSION['total_amount'] ?? 0;
                     document.getElementById('transaction_data').innerHTML = 
                         `Uang Masuk: Rp. ${data.received_amount} <br>
                          Total Akumulasi: Rp. ${data.total_amount} <br>`;
+
+                    let logs = data.logs.map(log => `<li>${log}</li>`).join('');
+                    document.getElementById('logs').innerHTML = logs;
                 } else {
                     document.getElementById('transaction_data').innerHTML = 'Error retrieving data';
                 }
@@ -51,7 +34,6 @@ $total_amount = $_SESSION['total_amount'] ?? 0;
         };
         xhr.send();
     }
-
     setInterval(updateTransactionData, 50);
     </script>
 </body>
