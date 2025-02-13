@@ -20,8 +20,8 @@ if (file_exists($log_file)) {
 
 echo json_encode([
     'status' => 'success',
-    'received_amount' => $_SESSION['received_amount'] ?? 0,
-    'total_amount' => $total_amount,
+    'received' => $_SESSION['received'] ?? 0,
+    'total' => $total_amount,
     'logs' => array_slice($log_entries, -10)
 ]);
 exit;
