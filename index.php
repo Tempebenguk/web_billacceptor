@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +18,19 @@
     <script>
         function updateTransactionData() {
             fetch('transaction.php')
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                document.getElementById('transaction_data').innerHTML = data;
+                if (data.status === 'success') {
+                    // Menampilkan data transaksi
+                    document.getElementById('transaction_data').innerHTML = `
+                        Uang Masuk: Rp. ${data.received_amount} <br>
+                        Total Akumulasi: Rp. ${data.total_amount} <br>
+                    `;
+                } else {
+                    document.getElementById('transaction_data').innerHTML = 'Error retrieving data';
+                }
             });
         }
-
         setInterval(updateTransactionData, 1000);
     </script>
 </body>
