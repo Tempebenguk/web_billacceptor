@@ -10,10 +10,10 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'error') {
-                        document.getElementById('logs').innerHTML = <li style='color:red;'>${data.message}</li>;
+                        document.getElementById('logs').innerHTML = `<li style='color:red;'>${data.message}</li>`;
                         return;
                     }
-                    let logs = data.logs.map(log => <li>${log}</li>).join('');
+                    let logs = data.logs.map(log => `<li>${log}</li>`).join('');
                     document.getElementById('logs').innerHTML = logs;
                 })
                 .catch(error => console.error('Error fetching logs:', error));
