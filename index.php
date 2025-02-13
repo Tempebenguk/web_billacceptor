@@ -15,6 +15,18 @@
                     }
                     let logs = data.logs.map(log => `<li>${log}</li>`).join('');
                     document.getElementById('logs').innerHTML = logs;
+                    
+                    if (typeof data.last_received === 'number') {
+                        document.getElementById('last_received').textContent = `Rp. ${data.last_received.toLocaleString()}`;
+                    } else {
+                        document.getElementById('last_received').textContent = 'Rp. 0';
+                    }
+
+                    if (typeof data.total_amount === 'number') {
+                        document.getElementById('total_amount').textContent = `Rp. ${data.total_amount.toLocaleString()}`;
+                    } else {
+                        document.getElementById('total_amount').textContent = 'Rp. 0';
+                    }
                 })
                 .catch(error => console.error('Error fetching logs:', error));
         }
