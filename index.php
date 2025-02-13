@@ -2,6 +2,21 @@
 // Membaca data dari log transaksi yang disimpan
 $log_file = '/home/eksan/logs/log.txt';
 $log_content = file_get_contents($log_file);
+
+// Menangani POST request jika form dikirim
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $received_amount = $_POST['received_amount'] ?? 0;
+    $total_amount = $_POST['total_amount'] ?? 0;
+
+    // Menyimpan data transaksi ke dalam file log
+    $timestamp = date("Y-m-d H:i:s");
+    file_put_contents($log_file, "[$timestamp] Uang masuk: Rp. $received_amount, Total akumulasi: Rp. $total_amount\n", FILE_APPEND);
+
+    // Set response header agar JavaScript bisa menangani response JSON
+    header('Content-Type: application/json');
+    echo json_encode(["message" => "Data transaksi berhasil diterima!"]);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +35,7 @@ $log_content = file_get_contents($log_file);
     <pre><?php echo $log_content; ?></pre>
 
     <h2>Form Input Transaksi (Untuk Testing)</h2>
-    <form method="POST" action="transaction.php">
+    <form method="POST" action="">
         <label for="received_amount">Jumlah Uang Masuk:</label><br>
         <input type="number" name="received_amount" required><br>
         <label for="total_amount">Total Akumulasi:</label><br>
@@ -34,7 +49,7 @@ $log_content = file_get_contents($log_file);
     <script>
         // Fungsi untuk mengambil data transaksi dari file
         function updateTransactionData() {
-            fetch('/transaction_log.txt')
+            fetch('log.txt')  // Pastikan ini mengarah ke file log yang benar
             .then(response => response.text())
             .then(data => {
                 document.getElementById('transaction_data').innerText = data;
