@@ -27,7 +27,7 @@
 <body>
     <h1>Log Transaksi Bill Acceptor</h1>
     <h3>Uang Masuk Terakhir: <span id="last_received">Rp. 0</span></h3>
-    <h3>Total Akumulasi: <span id="total_amount">Rp. 0</span></h3>
+    <h3>Total Akumulasi: <span id="total">Rp. 0</span></h3>
     <h3>Log Transaksi (Live):</h3>
     <ul id="logs"></ul>
 </body>
