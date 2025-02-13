@@ -1,6 +1,6 @@
 <?php
 // Membaca data dari log transaksi yang disimpan
-$log_file = '/home/eksan/billacceptor/logs/log.txt';
+$log_file = '/home/eksan/logs/log.txt';
 $log_content = file_get_contents($log_file);
 ?>
 
