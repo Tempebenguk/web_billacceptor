@@ -15,9 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'total_amount' => $total_amount
     ]);
 } else {
+    $received_amount = $_SESSION['received_amount'] ?? 0;
+    $total_amount = $_SESSION['total_amount'] ?? 0;
+
     echo json_encode([
-        'status' => 'error',
-        'message' => 'Hanya menerima POST request'
+        'status' => 'success',
+        'received_amount' => $received_amount,
+        'total_amount' => $total_amount
     ]);
 }
 ?>

@@ -16,22 +16,25 @@ session_start();
     <div id="transaction_data"></div>
 
     <script>
-        function updateTransactionData() {
-            fetch('transaction.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Menampilkan data transaksi
-                    document.getElementById('transaction_data').innerHTML = `
-                        Uang Masuk: Rp. ${data.received_amount} <br>
-                        Total Akumulasi: Rp. ${data.total_amount} <br>
-                    `;
-                } else {
-                    document.getElementById('transaction_data').innerHTML = 'Error retrieving data';
-                }
-            });
-        }
-        setInterval(updateTransactionData, 1000);
-    </script>
+    function updateTransactionData() {
+        fetch('transaction.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                document.getElementById('transaction_data').innerHTML = 
+                    `Uang Masuk: Rp. ${data.received_amount} <br>
+                     Total Akumulasi: Rp. ${data.total_amount} <br>`;
+            } else {
+                document.getElementById('transaction_data').innerHTML = 'Error retrieving data';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('transaction_data').innerHTML = 'Failed to fetch data';
+        });
+    }
+    setInterval(updateTransactionData, 1000);
+</script>
+
 </body>
 </html>
