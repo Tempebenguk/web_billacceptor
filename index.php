@@ -9,6 +9,10 @@
             fetch('backend.php')
                 .then(response => response.json())
                 .then(data => {
+                    if (data.status === 'error') {
+                        document.getElementById('logs').innerHTML = <li style='color:red;'>${data.message}</li>;
+                        return;
+                    }
                     document.getElementById('last_received').innerText = 'Rp. ' + (data.last_received ? data.last_received.toLocaleString('id-ID') : '0');
                     document.getElementById('total').innerText = 'Rp. ' + (data.total ? data.total.toLocaleString('id-ID') : '0');
                     let logs = data.logs.map(log => <li>${log}</li>).join('');
