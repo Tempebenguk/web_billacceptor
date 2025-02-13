@@ -17,6 +17,10 @@ if ($lines === false) {
     die(json_encode(['status' => 'error', 'message' => '⚠️ Gagal membaca file log!']));
 }
 
+foreach ($lines as $line) {
+    $log_entries[] = htmlspecialchars($line);
+}
+
 echo json_encode([
     'status' => 'success',
     'logs' => array_slice($log_entries, -10)

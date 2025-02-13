@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill Acceptor Dashboard</title>
+    <title>Log Transaksi Bill Acceptor</title>
     <script>
-        function fetchData() {
+        function fetchLogs() {
             fetch('backend.php')
                 .then(response => response.json())
                 .then(data => {
@@ -16,15 +16,15 @@
                     let logs = data.logs.map(log => <li>${log}</li>).join('');
                     document.getElementById('logs').innerHTML = logs;
                 })
-                .catch(error => console.error('Error fetching data:', error));
+                .catch(error => console.error('Error fetching logs:', error));
         }
-        setInterval(fetchData, 2000);
-        window.onload = fetchData;
+        setInterval(fetchLogs, 2000);
+        window.onload = fetchLogs;
     </script>
 </head>
 <body>
-    <h1>Bill Acceptor Dashboard</h1>
-    <h3>Log Transaksi:</h3>
+    <h1>Log Transaksi Bill Acceptor</h1>
+    <h3>Log Transaksi (Live):</h3>
     <ul id="logs"></ul>
 </body>
 </html>
