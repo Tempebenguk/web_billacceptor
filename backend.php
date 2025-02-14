@@ -16,14 +16,14 @@ if (file_exists($log_file)) {
         if (strpos($line, '💰 Uang masuk:') !== false) {
             preg_match('/Rp\.(\d+)/', $line, $matches);
             if (isset($matches[1])) {
-                $last_received = (int) $matches[1]; // Menyimpan uang masuk terakhir
+                $last_received = (int) $matches[1];
                 $_SESSION['received_amount'] = $last_received;
             }
         }
         if (strpos($line, 'Akumulasi transaksi:') !== false) {
             preg_match('/Rp\.(\d+)/', $line, $matches);
             if (isset($matches[1])) {
-                $total_amount = (int) $matches[1]; // Mengambil total akumulasi
+                $total_amount = (int) $matches[1];
             }
         }
         $log_entries[] = $line;
@@ -32,9 +32,9 @@ if (file_exists($log_file)) {
 
 echo json_encode([
     'status' => 'success',
-    'last_received' => $last_received, // Mengirim nilai uang masuk terakhir
-    'total' => $total_amount,          // Mengirim nilai total akumulasi
-    'logs' => array_slice($log_entries, -10) // Mengirim 10 log terakhir
+    'last_received' => $last_received,
+    'total' => $total_amount,
+    'logs' => array_slice($log_entries, -10) 
 ]);
 exit;
 ?>
