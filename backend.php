@@ -20,8 +20,8 @@ if (file_exists($log_file)) {
                 $_SESSION['received_amount'] = $last_received;
             }
         }
-        if (strpos($line, '(Total:') !== false) {
-            preg_match('/Rp\.(\d+)/', $line, $matches);
+        if (strpos($line, 'Total:') !== false) {
+            preg_match('/\(Total:\s*Rp\.(\d+)/', $line, $matches);
             if (isset($matches[1])) {
                 $total_amount = (int) $matches[1];
             }
