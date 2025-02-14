@@ -144,11 +144,11 @@ header('Access-Control-Allow-Headers: Content-Type');
         <div class="cardHolder">
             <div class="header">
                 <div class="heading">LOG TRANSAKSI BILL ACCEPTOR</div>
-                <div class="stepHeading">Uang Masuk Terakhir</div>
+                <div class="stepHeading">Transaksi</div>
             </div>
             <div class="card">
                 <div class="middle part">
-                    <div class="infoheader">JUMLAH UANG MASUK TERAKHIR</div>
+                    <div class="infoheader">NOMINAL UANG MASUK</div>
                     <div class="infocontent" id="last_received">Rp. 0</div>
                 </div>
                 <div class="bottom part">
