@@ -10,7 +10,9 @@ header('Access-Control-Allow-Headers: Content-Type');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Transaksi Bill Acceptor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* CSS yang sudah Anda miliki */
         * {
             margin: 0;
             padding: 0;
@@ -21,16 +23,21 @@ header('Access-Control-Allow-Headers: Content-Type');
             background: #ecf0f1;
         }
         .mainContainer {
-            width: 350px;
-            height: 590px;
-            margin: 0 auto;
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            margin: 20px auto;
             box-shadow: 0 0 10px #2323;
-            margin-top: 50px;
             background: white;
+            padding: 20px;
+            border-radius: 10px;
         }
         .cardHolder {
-            height: 300px;
+            height: auto;
             background: linear-gradient(to right, #6480ef, #7775e8, #806ce8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
         .center {
             display: flex;
@@ -42,44 +49,37 @@ header('Access-Control-Allow-Headers: Content-Type');
             align-items: center;
         }
         .heading {
-            height: 40px;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: bold;
             letter-spacing: 2px;
             color: white;
+            text-align: center;
         }
         .stepHeading {
-            height: 20px;
-            font-size: 16px;
-            font-weight: bolder;
+            font-size: 18px;
+            font-weight: bold;
             letter-spacing: 2px;
             color: white;
+            text-align: center;
+            margin: 10px 0;
         }
         .card {
-            height: 180px;
-            width: 280px;
             background: white;
-            margin: 0 auto;
-            border-radius: 1.2em;
-            margin-top: 25px;
-            padding: 12px 20px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .card > .part {
             height: 50px;
-            margin-bottom: 4px;
-        }
-        .card > .top {
-            display: flex;
-            justify-content: flex-end;
-        }
-        .card > .top > img {
-            height: 48px;
+            margin-bottom: 10px;
         }
         .infoheader {
-            height: 20px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
             letter-spacing: 2px;
             color: #95a5a6;
+            text-align: center;
         }
         .card > .middle > .infocontent {
             justify-content: space-between;
@@ -89,10 +89,10 @@ header('Access-Control-Allow-Headers: Content-Type');
             width: 150px;
         }
         .card > .middle > .infocontent > .num {
-            height: 25px;
-            font-size: 14px;
+            font-size: 20px;
             letter-spacing: 2px;
-            font-weight: bolder;
+            font-weight: bold;
+            text-align: center;
         }
         .card > .bottom {
             display: flex;
@@ -103,40 +103,32 @@ header('Access-Control-Allow-Headers: Content-Type');
         }
         .holderInfo > .name, .expDate > .date {
             font-size: 12px;
-            font-weight: bolder;
+            font-weight: bold;
             letter-spacing: 2px;
         }
         .status {
-            height: 35px;
-            width: 300px;
-            margin: 0 auto;
-            box-shadow: 0 0 10px #2323;
-            margin-top: 16px;
-            padding: 0 16px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            font-weight: bolder;
-        }
-        .status > i {
-            color: #16a085;
-            margin-right: 20px;
-            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #16a085;
+            color: white;
+            border-radius: 5px;
         }
         h5 {
-            width: 220px;
-            margin: 0 auto;
+            text-align: center;
             padding: 8px;
             margin-top: 14px;
             border-bottom: 2px solid #bdc3c7;
             letter-spacing: 2px;
-            font-size: 12px;
+            font-size: 14px;
             margin-bottom: 12px;
         }
         .options {
-            width: 250px;
-            height: 75px;
-            margin: 0 auto;
+            display: flex;
             justify-content: space-between;
+            margin-top: 20px;
         }
         .options > .opt {
             height: 75px;
@@ -146,41 +138,72 @@ header('Access-Control-Allow-Headers: Content-Type');
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
         }
         .options > .opt > .icon {
-            height: 30px;
+            font-size: 24px;
             color: #95a5a6;
-            font-size: 20px;
         }
         .optname {
-            height: 30px;
-            font-size: 10px;
-            color: #232323;
+            font-size: 12px;
+            font-weight: bold;
             letter-spacing: 2px;
-            font-weight: bolder;
+            text-align: center;
         }
         .payment {
-            height: 80px;
-            position: relative;
-            top: 24px;
-            box-shadow: 0 -5px 5px -5px #2323;
+            margin-top: 20px;
+            display: flex;
             justify-content: space-around;
         }
         .val {
-            height: 40px;
             font-size: 24px;
-            font-weight: bolder;
+            font-weight: bold;
             letter-spacing: 2px;
             color: #6480ef;
         }
         .button {
             width: 120px;
             height: 35px;
-            border-radius: 1.2em;
+            border-radius: 20px;
             background: linear-gradient(to right, #6480ef, #7775e8, #806ce8);
             color: white;
-            font-weight: bolder;
+            font-weight: bold;
             letter-spacing: 2px;
+            margin-top: 20px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 600px) {
+            .mainContainer {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .heading, .stepHeading, .infoheader {
+                font-size: 14px;
+            }
+
+            .card {
+                padding: 10px;
+            }
+
+            .status {
+                font-size: 12px;
+            }
+
+            .payment {
+                flex-direction: column;
+            }
+
+            .options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .options > .opt {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
     <script>
@@ -206,24 +229,19 @@ header('Access-Control-Allow-Headers: Content-Type');
 <body>
     <div class="mainContainer">
         <div class="cardHolder">
-            <div class="header">
-                <div class="heading center">LOG TRANSAKSI BILL ACCEPTOR</div>
-                <div class="stepHeading center">Uang Masuk Terakhir</div>
-                <div class="card">
-                    <div class="top part">
-                        <img src="https://i.imgrpost.com/imgr/2017/12/26/visa-1.png" alt="visa-1.png" border="0" />
+            <div class="heading">LOG TRANSAKSI BILL ACCEPTOR</div>
+            <div class="stepHeading">Uang Masuk Terakhir</div>
+            <div class="card">
+                <div class="middle part">
+                    <div class="infoheader vcenter">JUMLAH UANG MASUK TERAKHIR</div>
+                    <div class="infocontent number vcenter">
+                        <div class="num center" id="last_received">Rp. 0</div>
                     </div>
-                    <div class="middle part">
-                        <div class="infoheader vcenter">JUMLAH UANG MASUK TERAKHIR</div>
-                        <div class="infocontent number vcenter">
-                            <div class="num center" id="last_received">Rp. 0</div>
-                        </div>
-                    </div>
-                    <div class="bottom part">
-                        <div class="holderInfo">
-                            <div class="infoheader vcenter">TOTAL AKUMULASI</div>
-                            <div class="infocontent name vcenter" id="total">Rp. 0</div>
-                        </div>
+                </div>
+                <div class="bottom part">
+                    <div class="holderInfo">
+                        <div class="infoheader vcenter">TOTAL AKUMULASI</div>
+                        <div class="infocontent name vcenter" id="total">Rp. 0</div>
                     </div>
                 </div>
             </div>
