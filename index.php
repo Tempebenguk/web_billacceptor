@@ -2,17 +2,6 @@
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
-
-// Pastikan data diterima dengan benar
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $received_amount = isset($_POST['received_amount']) ? $_POST['received_amount'] : 'No data';
-    $total_amount = isset($_POST['total_amount']) ? $_POST['total_amount'] : 'No data';
-    
-    echo "Received Amount: " . $received_amount . "<br>";
-    echo "Total Amount: " . $total_amount . "<br>";
-} else {
-    echo "No data received.";
-}
 ?>
 
 
@@ -147,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 })
                 .catch(error => console.error('Error fetching logs:', error));
         }
-        setInterval(fetchLogs, 2000);
+        setInterval(fetchLogs, 1000);
         window.onload = fetchLogs;
     </script>
 </head>
