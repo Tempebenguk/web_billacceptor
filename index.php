@@ -159,7 +159,7 @@ header('Access-Control-Allow-Headers: Content-Type');
         </div>
         <div class="status">
             <i class="fa fa-check" aria-hidden="true"></i>
-            Log Transaksi (Live)
+            Log Transaksi
         </div>
         <ul id="logs"></ul>
     </div>
