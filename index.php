@@ -153,7 +153,7 @@ header('Access-Control-Allow-Headers: Content-Type');
                     <div class="infocontent" id="last_received">Rp. 0</div>
                 </div>
                 <div class="bottom part">
-                    <div class="infoheader">TOTAL AKUMULASI</div>
+                    <div class="infoheader">TOTAL AKUMULASI UANG</div>
                     <div class="infocontent" id="total">Rp. 0</div>
                 </div>
             </div>
